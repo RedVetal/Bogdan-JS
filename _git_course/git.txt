@@ -1,0 +1,115 @@
+# ======================
+# НАСТРОЙКА GIT ПОД СОВРЕМЕННЫЕ СТАНДАРТЫ
+# ======================
+git config --global init.defaultBranch main      # Установка main как ветки по умолчанию
+git config --global pull.rebase true             # Авто-rebase вместо merge при pull
+git config --global branch.autosetuprebase always # Авто-настройка rebase для новых веток
+git config --global user.name "Ваше Имя"         # Настройка имени
+git config --global user.email "ваш@email.com"   # Настройка email
+
+# ======================
+# ОСНОВНЫЕ КОМАНДЫ GIT
+# ======================
+
+# Инициализация и клонирование:
+git init                            # Создать новый репозиторий
+git clone <url>                     # Клонировать существующий репозиторий
+git clone <url> <папка>             # Клонировать в конкретную папку
+
+# Работа с удалёнными репозиториями:
+git remote add origin <url>         # Привязать удалённый репозиторий
+git remote -v                       # Показать все подключённые удалённые репозитории
+git remote remove origin            # Удалить привязку к origin
+git remote set-url origin <new-url> # Изменить URL привязанного репозитория
+git remote show origin              # Показать информацию о origin
+
+# Проверка SSH-подключения:
+ssh -T git@github.com               # Проверить подключение к GitHub
+ssh -T git@gitlab.com               # Проверить подключение к GitLab
+
+# Работа с изменениями:
+git add <file>                      # Добавить файл в staging area
+git add .                           # Добавить ВСЕ изменения
+git commit -m "Сообщение"           # Зафиксировать изменения
+git status                          # Показать текущее состояние
+git log --oneline --graph           # Показать компактную историю коммитов
+git diff                            # Показать недобавленные изменения
+
+# Синхронизация с удалённым репозиторием:
+git pull                            # Получить изменения с сервера (fetch + merge)
+git pull --rebase                   # Получить изменения с rebase
+git push                            # Отправить изменения на сервер
+git push -u origin <branch>         # Отправить и установить upstream
+git fetch                           # Получить изменения без слияния
+git fetch --prune                   # Обновить и очистить удалённые ветки
+
+# Ветвление:
+git branch                          # Показать список веток
+git branch -a                       # Показать все ветки (включая удалённые)
+git checkout -b <name>              # Создать и переключиться на новую ветку
+git checkout <branch>               # Переключиться на ветку
+git merge <branch>                  # Слить ветку с текущей
+git branch -d <branch>              # Удалить локальную ветку
+git push origin --delete <branch>   # Удалить удалённую ветку
+
+# Отмена изменений:
+git restore <file>                  # Отменить изменения в файле
+git reset --hard HEAD               # Отменить ВСЕ локальные изменения
+git commit --amend                  # Исправить последний коммит
+
+# ======================
+# СТАНДАРТНЫЙ WORKFLOW
+# ======================
+
+# 1. Создать ветку для задачи
+git checkout -b feature/task-name main
+
+# 2. Работа с изменениями:
+git add .
+git commit -m "Описание правок"
+git push -u origin feature/task-name
+
+# 3. Создать Pull Request через GitHub/GitLab
+
+# 4. После мержа PR:
+git checkout main
+git pull --rebase
+git branch -d feature/task-name
+git fetch --prune
+
+# ======================
+# ПОЛЕЗНЫЕ АЛИАСЫ (добавить в ~/.gitconfig)
+# ======================
+[alias]
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  lg = log --oneline --graph --all
+  last = log -1 HEAD
+  undo = reset HEAD~1
+
+# ======================
+# ПОЯСНЕНИЯ:
+# ======================
+# - Основной цикл работы: add → commit → push → pull
+# - pull.rebase=true сохраняет историю линейной
+# - Короткоживущие feature-ветки (2-3 дня) - современный стандарт
+# - Pull Request обязателен для code review в команде
+
+# ======================
+# ДОП. КОМАНДЫ
+# ======================
+
+# Перенос существующего проекта в Git:
+cd project-folder
+git init
+git remote add origin <url>
+git add .
+git commit -m "Initial commit"
+git push -u origin main
+
+# Переименование основной ветки:
+git branch -m master main
+git push -u origin main
+git push origin --delete master
