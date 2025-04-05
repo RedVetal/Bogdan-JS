@@ -1,0 +1,20 @@
+ 
+ //  блочная модель:
+каждый элемент, отображаемый на вэб-странице, можно рассматривать как блок (box)
+блок имеет 4 характеристики, которые можно контролировать с помощью css
+margin-border-padding-content
+
+/* сокращенное свойство */
+border: 10px dotted red;
+
+/* отдельные свойства границы */
+border-width: 10px;
+border-style: dotted;
+border-color: red;
+
+/* отдельные свойства сторон границы */
+border-top-width: 5px;
+border-right-color: blue;
+border-bottom-style: dashed;
+border-left-width: 10px;
+

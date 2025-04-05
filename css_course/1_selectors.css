@@ -1,0 +1,57 @@
+
+    <h1 style="background-color: red">  // встроенный css
+        Hello world
+    </h1>
+ 
+ 
+    <style>                     // внутренний css
+        h1{
+            background-color: :red;
+        }
+    </style>
+
+
+    
+    <head>                      // внешний css
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+
+
+
+
+    *{                     // выбрать все элементы
+        /*объявления*/
+    }
+
+
+    h1, p {                // селекторы типа
+        /*свойство    значение*/
+        background-color: :red;
+        font-size: 3rem;
+    }
+
+
+    /*<p class="highlight"> CSS is fun </p>*/
+    .highlight {              // селектор классов
+        /*объявления*/
+    }
+
+
+    /*<p id="shadow"> CSS is fun </p>*/
+    #shadow {                // селектор по ID
+        /*объявления*/
+    }  
+
+
+
+    #mainHeading,          // групповой селектор
+    p,
+    span {
+        /*объявления*/
+    }
+
+
+    /*<p data-category="main"> CSS is fun </p>*/
+    [data-category='main'] {  // селектор атрибутов
+        /*объявления*/
+    }
