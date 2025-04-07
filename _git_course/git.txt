@@ -2,10 +2,14 @@
 # НАСТРОЙКА GIT ПОД СОВРЕМЕННЫЕ СТАНДАРТЫ
 # ======================
 git config --global init.defaultBranch main      # Установка main как ветки по умолчанию
+
 git config --global pull.rebase true             # Авто-rebase вместо merge при pull
 git config --global branch.autosetuprebase always # Авто-настройка rebase для новых веток
 git config --global user.name "Ваше Имя"         # Настройка имени
 git config --global user.email "ваш@email.com"   # Настройка email
+# Отменить настройки rebase (если нужно):
+git config --global --unset pull.rebase
+git config --global branch.autosetuprebase false
 
 # ======================
 # ОСНОВНЫЕ КОМАНДЫ GIT
